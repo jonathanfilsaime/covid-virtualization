@@ -2,6 +2,7 @@ import React from 'react'
 import CardExampleCard from './CardExampleCard.js'
 import HeaderExampleTextAlignment from './HeaderExampleTextAlignment.js'
 import { Card } from 'semantic-ui-react'
+import ButtonExampleMultipleConditionals from './ButtonExampleMultipleConditionals.js'
 import logo from './logo.svg';
 import './App.css';
 
@@ -23,6 +24,10 @@ class App extends React.Component {
         return (
         <div>
             <HeaderExampleTextAlignment/>
+            <br/>
+            <ButtonExampleMultipleConditionals/>
+            <br/>
+            <br/>
             <Card.Group itemsPerRow={5}>
                 {this.state.stateName.map(item => <CardExampleCard stateName={item}/>)};
             </Card.Group>
