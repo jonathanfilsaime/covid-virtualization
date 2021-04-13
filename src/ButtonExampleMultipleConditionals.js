@@ -1,13 +1,18 @@
 import React from 'react'
 import { Button, Segment, Grid } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const ButtonExampleMultipleConditionals = () => (
 
   <div class="ui one column center aligned page grid">
       <Button.Group>
-        <Button>USA</Button>
+            <Link to="/">
+            <Button>USA</Button>
+            </Link>
         <Button.Or />
-        <Button>World</Button>
+            <Link to="/world">
+            <Button>World</Button>
+            </Link>
       </Button.Group>
   </div>
 )

@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import { Card, Image } from 'semantic-ui-react'
+import { Card, Image, Header } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+
 
 
 class CardExampleCard extends React.Component {
@@ -21,8 +23,8 @@ class CardExampleCard extends React.Component {
 
     color() {
         if(this.state.currentNewCases > this.state.previousNewCases) {
-            this.setState({ color: 'red'})
-        } else {this.setState({color: 'green'})}
+            this.setState({ color: "red"})
+        } else {this.setState({color: "green"})}
     }
 
 
@@ -43,8 +45,6 @@ class CardExampleCard extends React.Component {
                         currentNewCases: response.data.newCases,
                         currentState: response.data.state
                       });
-                console.log("tired")
-                console.log(this.state)
                 });
         axios.get(`http://localhost:8080/data/state/${stateName}/date/${previousDate.padStart(10,'0')}`)
         .then(response => {
@@ -55,29 +55,28 @@ class CardExampleCard extends React.Component {
                                 previousNewCases: response.data.newCases,
                                 previousState: response.data.state
                               });
-                        console.log("previous tired")
-                        console.log(this.state)
                         this.color()
                         });
-
     }
 
-
-
-
     render() {
-
         return (
-        <Card color={this.state.color}>
+        <Card>
             <Card.Content>
-                <Card.Header>{this.state.stateName}</Card.Header>
+                <Link to={{pathname: '/states', stateName: `${this.state.stateName}` }} style={{ textDecoration: 'none' }}>
+                <h1 style={{ textDecoration: 'none' }}>{this.state.stateName}</h1>
+                <br/>
                 <Card.Meta>
-                    <Image src={require('./image/Alabama.png')} size='medium'/>
+                    <Image src={require(`./assets/image/${this.state.stateName}.png`).default} size='small'/>
                 </Card.Meta>
-              <p>New Cases: {this.state.currentNewCases}</p>
+                </Link>
             </Card.Content>
-            <Card.Content extra>
-              <p>New Deaths: {this.state.currentDeaths}</p>
+            <br/>
+            <Card.Content>
+            <Header as='h4' color={this.state.color}>New Cases: {this.state.currentNewCases}</Header>
+            </Card.Content>
+            <Card.Content>
+              <h4>New Deaths: {this.state.currentDeaths}</h4>
             </Card.Content>
           </Card>
         );

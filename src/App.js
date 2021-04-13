@@ -3,34 +3,44 @@ import CardExampleCard from './CardExampleCard.js'
 import HeaderExampleTextAlignment from './HeaderExampleTextAlignment.js'
 import { Card } from 'semantic-ui-react'
 import ButtonExampleMultipleConditionals from './ButtonExampleMultipleConditionals.js'
+import UsStates from './UsStates.js'
+import States from './States.js'
+import World from './World.js'
 import logo from './logo.svg';
+import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { stateName: ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut',
-        'Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana',
-        'Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska',
-        'Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio',
-        'Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee',
-        'Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],
-        };
     }
 
+     showUsStates = () => {
+        if(window.location.pathname === '/') {
+            return <UsStates/>
+        }
+    }
 
+    showWorld = () => {
+            if(window.location.pathname === '/world') {
+                return <World/>
+            }
+        }
 
     render() {
         return (
         <div>
-            <HeaderExampleTextAlignment/>
-            <br/>
-            <ButtonExampleMultipleConditionals/>
-            <br/>
-            <br/>
-            <Card.Group itemsPerRow={5}>
-                {this.state.stateName.map(item => <CardExampleCard stateName={item}/>)};
-            </Card.Group>
+
+            <BrowserRouter>
+                <HeaderExampleTextAlignment/>
+                <br/>
+                <ButtonExampleMultipleConditionals/>
+                <br/>
+                <br/>
+                <Route path="/" exact component={UsStates} />
+                <Route path="/world" exact component={World} />
+                <Route path="/states" exact component={States} />
+            </BrowserRouter>
         </div>
         );
     }
