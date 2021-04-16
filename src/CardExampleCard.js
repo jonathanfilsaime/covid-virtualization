@@ -55,8 +55,9 @@ class CardExampleCard extends React.Component {
                                 previousNewCases: response.data.newCases,
                                 previousState: response.data.state
                               });
-                        this.color()
+                              this.color()
                         });
+
     }
 
     render() {
