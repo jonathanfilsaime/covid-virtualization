@@ -5,11 +5,10 @@ import axios from 'axios'
 class TableExampleSelectableRow extends React.Component {
     constructor(props) {
         super(props);
-        let countyData = {}
-        props.counties.forEach(county => {
-            console.log("props.counties.county ", county);
+        let countyData = {};
+        this.props.counties.forEach((county) => {
             countyData[county] = {};
-            console.log("countyData[] ", countyData)
+            console.log("countyData[county] -> ", countyData)
          });
         this.state = countyData;
     }
@@ -17,18 +16,15 @@ class TableExampleSelectableRow extends React.Component {
 
 
     componentDidMount() {
-        console.log("countyData ", this.state.countyData)
-        this.props.counties.map(county => axios.get(`http://localhost:8080/data/county/${county}/state/${this.props.stateName}/today`)
-                                            .then(response => this.setState(
-                                                {[county]: response.data}
-                                                )))
+        this.props.counties.forEach(county => axios.get(`http://localhost:8080/data/county/${county}/state/${this.props.stateName}/today`)
+                                            .then(response => {this.setState({[county]: response.data});
+                                                                console.log(response)}
+                                                ))
     }
 
-
-
     render() {
-        console.log(this.state)
-        return (
+        console.log("this.state -> ", this.state)
+            return (
               <Table celled selectable>
                 <Table.Header>
                   <Table.Row>
@@ -42,8 +38,8 @@ class TableExampleSelectableRow extends React.Component {
                 {this.props.counties.map(county => { return (
                 <Table.Row>
                     <Table.Cell>{county}</Table.Cell>
-                    <Table.Cell>No Action</Table.Cell>
-                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>{this.state[county].newCases}</Table.Cell>
+                    <Table.Cell>{this.state[county].deaths}</Table.Cell>
                   </Table.Row>
                 )})}
 
