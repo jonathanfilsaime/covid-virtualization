@@ -19,15 +19,13 @@ class States extends React.Component {
 //                    .then(response => response.data.map(data => this.setState({ date: this.state.date.concat([data.date]),
 //                                                                            deaths: this.state.deaths.concat([data.deaths]),
 //                                                                            newCases: this.state.newCases.concat([data.newCases])})));
-        axios.get(`http://localhost:8080/data/state/${stateName}`)
-                    .then(response => response.data.map(county => this.setState({ counties: this.state.counties.concat([county])})));
     }
 
     render() {
         return (
             <div>
                 <Header as='h1'>{this.state.stateName}</Header>
-                <TableExampleSelectableRow stateName={this.state.stateName.toLowerCase()} counties={this.state.counties}/>
+                <TableExampleSelectableRow stateName={this.state.stateName.toLowerCase()}/>
             </div>
         );
     }

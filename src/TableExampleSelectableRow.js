@@ -5,21 +5,17 @@ import axios from 'axios'
 class TableExampleSelectableRow extends React.Component {
     constructor(props) {
         super(props);
-        let countyData = {};
-        this.props.counties.forEach((county) => {
-            countyData[county] = {};
-            console.log("countyData[county] -> ", countyData)
-         });
-        this.state = countyData;
+
+        this.state = {stateName: this.props.stateName,
+                       countyData: [],}
     }
 
 
 
     componentDidMount() {
-        this.props.counties.forEach(county => axios.get(`http://localhost:8080/data/county/${county}/state/${this.props.stateName}/today`)
-                                            .then(response => {this.setState({[county]: response.data});
-                                                                console.log(response)}
-                                                ))
+        console.log("did I even get called")
+        axios.get(`http://localhost:8080/data/counties/state/${this.state.stateName}/today`)
+            .then(response => this.setState({countyData: response.data}))
     }
 
     render() {
@@ -35,13 +31,15 @@ class TableExampleSelectableRow extends React.Component {
                 </Table.Header>
 
                 <Table.Body>
-                {this.props.counties.map(county => { return (
+            this.state.countyData.forEach(county => { return (
                 <Table.Row>
-                    <Table.Cell>{county}</Table.Cell>
-                    <Table.Cell>{this.state[county].newCases}</Table.Cell>
-                    <Table.Cell>{this.state[county].deaths}</Table.Cell>
-                  </Table.Row>
-                )})}
+                    <Table.Cell>{county.countyName}</Table.Cell>
+                    <Table.Cell>{county.newCases}</Table.Cell>
+                    <Table.Cell>{county.deaths}</Table.Cell>
+                </Table.Row>
+            )});
+
+
 
                 </Table.Body>
               </Table>
