@@ -31,16 +31,13 @@ class TableExampleSelectableRow extends React.Component {
                 </Table.Header>
 
                 <Table.Body>
-            this.state.countyData.forEach(county => { return (
-                <Table.Row>
-                    <Table.Cell>{county.countyName}</Table.Cell>
-                    <Table.Cell>{county.newCases}</Table.Cell>
-                    <Table.Cell>{county.deaths}</Table.Cell>
-                </Table.Row>
-            )});
-
-
-
+                {this.state.countyData.map(county => {return (
+                    <Table.Row>
+                        <Table.Cell>{county.countyName}</Table.Cell>
+                        <Table.Cell>{county.newCases.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Table.Cell>
+                        <Table.Cell>{county.deaths.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Table.Cell>
+                    </Table.Row>
+                )})}
                 </Table.Body>
               </Table>
         );
@@ -48,3 +45,6 @@ class TableExampleSelectableRow extends React.Component {
 }
 
 export default TableExampleSelectableRow
+
+
+

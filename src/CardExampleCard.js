@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Card, Image, Header } from 'semantic-ui-react'
+import { Card, Image, Header, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 
@@ -74,10 +74,14 @@ class CardExampleCard extends React.Component {
             </Card.Content>
             <br/>
             <Card.Content>
-            <Header as='h4' color={this.state.color}>New Cases: {this.state.currentNewCases}</Header>
+            <div>
+            <Icon name='chart line' size='large' />   New Cases: {this.state.currentNewCases}
+            </div>
             </Card.Content>
             <Card.Content>
-              <h4>New Deaths: {this.state.currentDeaths}</h4>
+            <div >
+            <Icon name='ambulance' size='large' />    New Deaths: {this.state.currentDeaths}
+            </div>
             </Card.Content>
           </Card>
         );

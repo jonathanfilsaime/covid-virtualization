@@ -1,6 +1,7 @@
 import React from 'react'
 import { Header, Divider } from 'semantic-ui-react'
 
+
 const HeaderExampleTextAlignment = () => (
 
     <div>

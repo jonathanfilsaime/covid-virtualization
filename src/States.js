@@ -1,31 +1,22 @@
 import React from 'react'
 import axios from 'axios'
 import { Header } from 'semantic-ui-react'
+import Chart from './Chart.js'
 import TableExampleSelectableRow from './TableExampleSelectableRow.js'
 
 class States extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {  stateName: this.props.location.stateName,
-                                counties: [],
-                                newCases: [],
-                                deaths: []
-                }
-    }
-
-    componentDidMount(){
-        let stateName = this.state.stateName.toLowerCase()
-//        axios.get(`http://localhost:8080/data/state/${stateName}/days/30`)
-//                    .then(response => response.data.map(data => this.setState({ date: this.state.date.concat([data.date]),
-//                                                                            deaths: this.state.deaths.concat([data.deaths]),
-//                                                                            newCases: this.state.newCases.concat([data.newCases])})));
+        this.state = {  stateName: this.props.location.stateName.toLowerCase()}
     }
 
     render() {
         return (
             <div>
                 <Header as='h1'>{this.state.stateName}</Header>
-                <TableExampleSelectableRow stateName={this.state.stateName.toLowerCase()}/>
+                <Chart stateName={this.state.stateName.toLowerCase()}/>
+                <TableExampleSelectableRow stateName={this.state.stateName.toLowerCase()} />
+                <br/>
             </div>
         );
     }
